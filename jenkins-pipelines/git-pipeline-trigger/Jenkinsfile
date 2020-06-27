@@ -41,13 +41,18 @@ node(){
         }
     }
     stage("pre-commit hook install"){
-        sh('''
-            sudo pre-commit install
-        ''')
+        dir(work_dir){
+            sh('''
+                echo "$PWD"
+                sudo pre-commit install
+            ''')
+        }
     }
     stage("pre-commit Check"){
-        sh('''
-            pre-commit run --all-files
-        ''')
+        dir(work_dir){
+            sh('''
+                pre-commit run --all-files
+            ''')
+        }
     }    
 }
