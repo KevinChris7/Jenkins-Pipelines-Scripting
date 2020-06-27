@@ -6,6 +6,6 @@ repos:
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
 -   repo: https://github.com/KevinChris7/testing-repo
-    rev: v1.0.0
+    rev: cf80edb
     hooks:
-    -   id: black  
+    -   id: trailing-whitespace
