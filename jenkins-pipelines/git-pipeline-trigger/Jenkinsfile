@@ -1,0 +1,75 @@
+#!/usr/bin/env groovy
+
+node(){
+    def work_dir = '/project/internaltools'
+    def output
+    stage("Git Checkout"){
+        checkout(
+            [
+                $class: 'GitSCM',
+                branches: [[name: 'master']],
+                userRemoteConfigs: [[url: "${GIT_REPO_NOTIFY}", credentialsId: "${CREDENTIALS_ID}"]]
+            ]
+        )
+        println("Checkout Completed Succesfully")
+    }
+    stage("Install GIT&NPM dependencies") {
+        try{
+            sh('''
+                #!/bin/bash
+                mkdir -p ${JENKINS_HOME}/project
+                mkdir -p ${JENKINS_HOME}/project/internaltools
+                git --version $?
+                if [ $? -eq 0 ]; then
+                    echo "GIT is already installed"
+                else 
+                    sudo yum install git -y
+                    echo "Installed GIT"
+                fi
+                if hash npm 2>/dev/null; then
+                    echo "Node and NPM exists"
+                else
+                    echo "Installing Node and NPM...."
+                    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+                    . ~/.nvm/nvm.sh
+                    nvm install node
+                    node -e "console.log('Running Node.js ' + process.version)"
+                    echo "NPM Installed successfully"                
+                    echo "$PWD"
+                fi
+            ''')
+        }
+        catch(e){
+            println("Exception occurred in Installing GIT and NPM")
+        }
+    }
+
+    stage("Install Husky"){
+        try{
+            sh ('''
+                if hash husky 2>/dev/null; then
+                    echo "Husky is already installed"
+                else
+                    echo "Installing Husky"
+                    sudo chmod 777 /var/lib/jenkins/project/internaltools
+                    sudo chown -R ec2-user /usr/bin/node
+                    echo "$PWD"
+                    npm install husky --save-dev  
+                    echo "Husky Installation completed"                        
+                fi
+            ''')
+        }
+        catch(e) {
+            println("Exception occurred in Installing Husky")
+        }
+        finally {
+            deleteDir()
+        }
+    }
+    // stage("Pre-Push Check"){
+
+    // }
+    // stage("Commit or Decline"){
+        
+    // }
+}
