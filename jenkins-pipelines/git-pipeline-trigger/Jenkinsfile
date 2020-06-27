@@ -1,7 +1,8 @@
 #!/usr/bin/env groovy
 
 node(){
-    def work_dir = 'project/internaltools'
+    //def work_dir = 'project/internaltools'
+    def work_dir = '/var/lib/jenkins/workspace/git_push_notifier'
     def output
     stage("Git Checkout"){
         checkout(
@@ -15,26 +16,28 @@ node(){
     }
     stage("Install GIT&Pre-commit") {
         try{
-            sh('''
-                #!/bin/bash
-                mkdir -p ${JENKINS_HOME}/project
-                mkdir -p ${JENKINS_HOME}/project/internaltools
-                git --version $?
-                if [ $? -eq 0 ]; then
-                    echo "GIT is already installed"
-                else 
-                    sudo yum install git -y
-                    echo "Installed GIT"
-                fi
-                if hash pre-commit 2>/dev/null; then
-                    echo "pre-commit exists"
-                else
-                    echo "Installing Pre-Commit...."
-                    sudo pip install pre-commit
-                    echo "Pre-Commit Installed successfully"                
-                    echo "$PWD"
-                fi
-            ''')
+            dir(work_dir){
+                sh('''
+                    #!/bin/bash
+                    mkdir -p ${JENKINS_HOME}/project
+                    mkdir -p ${JENKINS_HOME}/project/internaltools
+                    git --version $?
+                    if [ $? -eq 0 ]; then
+                        echo "GIT is already installed"
+                    else 
+                        sudo yum install git -y
+                        echo "Installed GIT"
+                    fi
+                    if hash pre-commit 2>/dev/null; then
+                        echo "pre-commit exists"
+                    else
+                        echo "Installing Pre-Commit...."
+                        sudo pip install pre-commit
+                        echo "Pre-Commit Installed successfully"                
+                        echo "$PWD"
+                    fi
+                ''')
+            }
         }
         catch(e){
             println("Exception occurred in Installing GIT and Pre-Commit")
