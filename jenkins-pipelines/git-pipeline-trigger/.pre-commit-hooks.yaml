@@ -1,0 +1,4 @@
+- id: trailing-whitespace
+  name: Trim Trailing Whitespace
+  entry: trailing-whitespace-fixer
+  language: python
