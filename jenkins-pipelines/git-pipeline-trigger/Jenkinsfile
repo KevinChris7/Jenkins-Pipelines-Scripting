@@ -62,14 +62,8 @@ node(){
         catch(e) {
             println("Exception occurred in Installing Husky")
         }
-        finally {
-            deleteDir()
-        }
+        // finally {
+        //     deleteDir()
+        // }
     }
-    // stage("Pre-Push Check"){
-
-    // }
-    // stage("Commit or Decline"){
-        
-    // }
 }
