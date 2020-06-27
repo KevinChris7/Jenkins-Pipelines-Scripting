@@ -40,4 +40,14 @@ node(){
             println("Exception occurred in Installing GIT and Pre-Commit")
         }
     }
+    stage("pre-commit hook install"){
+        sh('''
+            sudo pre-commit install
+        ''')
+    }
+    stage("pre-commit Check"){
+        sh('''
+            pre-commit run --all-files
+        ''')
+    }    
 }
