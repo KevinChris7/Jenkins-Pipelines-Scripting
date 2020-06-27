@@ -30,7 +30,7 @@ node(){
                     echo "pre-commit exists"
                 else
                     echo "Installing Pre-Commit...."
-                    pip install pre-commit
+                    sudo pip install pre-commit
                     echo "Pre-Commit Installed successfully"                
                     echo "$PWD"
                 fi
@@ -40,8 +40,4 @@ node(){
             println("Exception occurred in Installing GIT and Pre-Commit")
         }
     }
-
-        // finally {
-        //     deleteDir()
-        // }
 }
