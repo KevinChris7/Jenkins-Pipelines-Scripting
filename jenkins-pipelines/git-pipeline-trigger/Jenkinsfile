@@ -52,6 +52,7 @@ node(){
                 else
                     echo "Installing Husky"
                     sudo chmod 777 /var/lib/jenkins/project/internaltools
+                    sudo chmod 777 /var/lib/jenkins/workspace/git_push_notifier
                     sudo chown -R ec2-user /usr/bin/node
                     echo "$PWD"
                     npm install husky --save-dev  
