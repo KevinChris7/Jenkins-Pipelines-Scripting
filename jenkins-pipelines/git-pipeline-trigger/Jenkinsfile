@@ -44,5 +44,4 @@ node(){
         // finally {
         //     deleteDir()
         // }
-    }
 }
