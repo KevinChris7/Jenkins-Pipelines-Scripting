@@ -67,8 +67,8 @@ node(){
         catch(e){
             println("Error occurred in pre-commit testing")
         }
-        // finally{
-        //     deleteDir()
-        // }
+        finally{
+            cleanWs()
+        }
     }    
 }
