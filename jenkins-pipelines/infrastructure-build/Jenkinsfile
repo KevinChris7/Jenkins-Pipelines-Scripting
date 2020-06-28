@@ -79,7 +79,7 @@ node(){
             println("Terraform Deployment Failed")
         }
         finally {
-            deleteDir()
+            cleanWs()
         }
     }
 
