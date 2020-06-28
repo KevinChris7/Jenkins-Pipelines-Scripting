@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 
 node(){
-    //def work_dir = 'project/internaltools'
     def work_dir = '/var/lib/jenkins/workspace/git_push_notifier'
     def output
     stage("Git Checkout"){
@@ -45,21 +44,31 @@ node(){
         }
     }
     stage("pre-commit hook install"){
-        dir(work_dir){
-            sh('''
-                echo "$PWD"
-                sudo pre-commit install
-            ''')
+        try{
+            dir(work_dir){
+                sh('''sudo pre-commit install''')
+            }
+        }
+        catch(e){
+            println("Error occurred in pre-commit install")
         }
     }
     stage("pre-commit Check"){
-        dir(work_dir){
-            sh('''
-                #!/usr/bin/python
-                pre-commit clean
-                pre-commit autoupdate
-                pre-commit run --all-files
-            ''')
+        try{
+            dir(work_dir){
+                sh('''
+                    #!/usr/bin/python
+                    pre-commit clean
+                    pre-commit autoupdate
+                    pre-commit run --all-files
+                ''')
+            }
+        }
+        catch(e){
+            println("Error occurred in pre-commit testing")
+        }
+        finally{
+            deleteDir()
         }
     }    
 }
