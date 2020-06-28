@@ -60,7 +60,7 @@ node(){
                     #!/usr/bin/python
                     pre-commit clean
                     pre-commit autoupdate
-                    pre-commit run --all-files
+                    pre-commit run --all-files | tee output.txt | grep 'error'
                 ''')
             }
         }
