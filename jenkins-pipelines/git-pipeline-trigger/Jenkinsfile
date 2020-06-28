@@ -67,9 +67,8 @@ node(){
         catch(e){
             println("Error occurred in pre-commit testing")
         }
-        finally{
-            sh "chmod -R 777 ."
-            deleteDir()
-        }
+        // finally{
+        //     deleteDir()
+        // }
     }    
 }
