@@ -1,4 +1,4 @@
-# **Jenkins Pipeline As Code **
+# **Jenkins Pipeline As Code**
 
 ## **About Jenkins Pipeline**
 
@@ -58,7 +58,7 @@ Seed job
 
 5.Create a Seed Job and select DSL for adding the required Pipeline code
 
-6.Run the seed job manually
+6.Run the Seed job manually
 
 7.Required Pipeline jobs will be created as the result of seed job
 
