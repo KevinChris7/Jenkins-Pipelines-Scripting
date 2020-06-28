@@ -78,9 +78,9 @@ node(){
         catch(e) {
             println("Terraform Deployment Failed")
         }
-        finally {
-            cleanWs()
-        }
+        // finally {
+        //     deleteDir()
+        // }
     }
 
 }
