@@ -1,6 +1,6 @@
 BUILD_INFRASTRUCTURE = 'cjk_terraform'
 PROJECT_NAME = 'cjk'
-CJK_GIT_URL = 'git@github.com:KevinChris7/Terraform-AWS-2Tier-WebApplication.git'
+CJK_GIT_URL = 'https://github.com/KevinChris7/Jenkins-Pipelines-Scripting.git'
 BRANCH_NAME = 'master'
 TERRAFORM_VERSION = '0.12.26'
 REGION = 'ap-south-1'
@@ -33,7 +33,7 @@ pipelineJob(BUILD_INFRASTRUCTURE){
                 git{
                     remote {
                         credentials(CREDENTIALS_ID)
-                        url("git@github.com:KevinChris7/Jenkins-Pipelines-Scripting.git")
+                        url("https://github.com/KevinChris7/Jenkins-Pipelines-Scripting.git")
                     }
                     branch('*/master')
                 }
