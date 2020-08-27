@@ -13,7 +13,7 @@ node(){
         println("GIT Checkout Success")          
     }
         
-    stage('Download & Install Terraform'){
+    stage('Download Terraform'){
         sh ('''
 	    #!/bin/bash
 	    if [ ! -d ${JENKINS_HOME}/project/terraform ]; then
@@ -22,14 +22,24 @@ node(){
                 mkdir -p ${JENKINS_HOME}/project
                 mkdir -p ${JENKINS_HOME}/project/terraform
 		cd ${JENKINS_HOME}/project/terraform
-                sudo yum install wget zip python-pip -y
-                curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-                sudo unzip terraform.zip -d ${JENKINS_HOME}/project/terraform
-                sudo rm -rf terraform.zip
 	    else
                 echo "Terraform is already Installed"
 	    fi
         ''')
+    }
+	
+       stage('Install Terraform'){
+	     dir(workspace_dir) {
+        	sh ('''
+	    		#!/bin/bash
+                	sudo yum install wget zip python-pip -y
+                	curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+                	sudo unzip terraform.zip -d ${JENKINS_HOME}/project/terraform
+                	sudo rm -rf terraform.zip
+
+	        ''')
+	     }
+
     }
 
    stage('Initialize and Plan Terraform'){
