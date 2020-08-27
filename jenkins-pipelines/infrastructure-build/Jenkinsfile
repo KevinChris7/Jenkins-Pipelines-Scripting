@@ -16,15 +16,19 @@ node(){
     stage('Download & Install Terraform'){
         sh ('''
 	    #!/bin/bash
+	    if [ ! -d ${JENKINS_HOME}/project/terraform ]; then
                 echo $PWD
 		echo ${JENKINS_HOME}
                 mkdir -p ${JENKINS_HOME}/project
                 mkdir -p ${JENKINS_HOME}/project/terraform
+		cd /${JENKINS_HOME}/project/terraform
                 sudo yum install wget zip python-pip -y
                 curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-                sudo unzip terraform.zip -d jenkins/project/terraform
+                sudo unzip terraform.zip -d ${JENKINS_HOME}/project/terraform
                 sudo rm -rf terraform.zip
+	    else
                 echo "Terraform is already Installed"
+	    fi
         ''')
     }
 
