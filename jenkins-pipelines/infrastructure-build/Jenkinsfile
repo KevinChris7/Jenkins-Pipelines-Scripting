@@ -16,7 +16,7 @@ node(){
         
     stage('Download & Install Terraform'){
         sh ('''
-            if [! -d "jenkins/project/terraform"];
+            if [ ! -d "jenkins/project/terraform" ];
             then             
                 #!/bin/bash
                 mkdir -p jenkins/project
