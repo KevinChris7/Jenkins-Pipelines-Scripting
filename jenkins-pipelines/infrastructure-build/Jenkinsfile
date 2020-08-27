@@ -17,8 +17,13 @@ node(){
     stage('Download & Install Terraform'){
         sh ('''
 	    #!/bin/bash
-            if [ ! -d jenkins/project/terraform ];
+	    if [ ! -d jenkins/project ]; then
+	    	mkdir jenkins/project
+	    else
+	    	echo "Failed"
+	    fi
 	    
+            if [ ! -d jenkins/project/terraform ];
             then             
                 
                 mkdir -p jenkins/project
