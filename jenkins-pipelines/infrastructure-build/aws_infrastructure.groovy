@@ -1,6 +1,6 @@
 BUILD_INFRASTRUCTURE = 'cjk_terraform'
 PROJECT_NAME = 'cjk'
-CJK_GIT_URL = 'https://github.com/KevinChris7/Jenkins-Pipelines-Scripting.git'
+CJK_GIT_URL = 'https://github.com/KevinChris7/Terraform-AWS-2Tier-WebApplication.git'
 BRANCH_NAME = 'master'
 TERRAFORM_VERSION = '0.12.26'
 REGION = 'ap-south-1'
