@@ -21,7 +21,7 @@ node(){
 		echo ${JENKINS_HOME}
                 mkdir -p ${JENKINS_HOME}/project
                 mkdir -p ${JENKINS_HOME}/project/terraform
-		cd /${JENKINS_HOME}/project/terraform
+		cd ${JENKINS_HOME}/project/terraform
                 sudo yum install wget zip python-pip -y
                 curl -o terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
                 sudo unzip terraform.zip -d ${JENKINS_HOME}/project/terraform
