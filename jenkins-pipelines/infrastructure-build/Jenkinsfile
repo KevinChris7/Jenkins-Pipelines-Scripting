@@ -16,7 +16,7 @@ node(){
     stage('Download & Install Terraform'){
         sh ('''
 	    #!/bin/bash
-           
+                echo $PWD
                 mkdir -p jenkins/project
                 mkdir -p jenkins/project/terraform
                 sudo yum install wget zip python-pip -y
